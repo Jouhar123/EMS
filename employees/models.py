@@ -11,9 +11,9 @@ class Employee(models.Model):
         editable=False,
         unique=True
     )
-    full_name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=225)
     email = models.EmailField(unique=True)
-    department = models.CharField(max_length=50)
+    department = models.CharField(max_length=225)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
