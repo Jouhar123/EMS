@@ -14,20 +14,20 @@ class EmployeeSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 # Attendence
-class AttendanceSerializer(serializers.ModelSerializer):
-    employee_name = serializers.CharField(
-        source="employee.username", read_only=True
-    )
+# class AttendanceSerializer(serializers.ModelSerializer):
+#     employee_name = serializers.CharField(
+#         source="employee.username", read_only=True
+#     )
 
-    class Meta:
-        model = Attendance
-        fields = [
-            "id",
-            "employee",
-            "employee_name",
-            "date",
-            "status",
-        ]
+#     class Meta:
+#         model = Attendance
+#         fields = [
+#             "id",
+#             "employee",
+#             "employee_name",
+#             "date",
+#             "status",
+#         ]
 
 
 # Signup
