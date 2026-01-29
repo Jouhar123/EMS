@@ -32,20 +32,20 @@ class EmployeeSerializer(serializers.ModelSerializer):
 
 # Signup
 class SignupSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+    password = serializers.CharField(write_only=True, min_length=8)
 
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password')
+        extra_kwargs = {'email': {'required': True, 'allow_blank': False}}
 
     def create(self, validated_data):
-        user = User.objects.create_user(
+        return User.objects.create_user(
             username=validated_data['username'],
-            email=validated_data.get('email'),
+            email=validated_data['email'],
             password=validated_data['password'],
-            is_staff=False   # normal user
+            is_staff=False
         )
-        return user
 
 
 class UserSerializer(serializers.ModelSerializer):
