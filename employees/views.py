@@ -5,7 +5,7 @@ from .serializers import EmployeeSerializer, AttendanceSerializer ,SignupSeriali
 from rest_framework.viewsets import ModelViewSet
 from .permissions import IsAdminOrReadOnly
 from rest_framework.views import APIView
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser,AllowAny
 from rest_framework.response import Response
 from datetime import datetime
 from django.shortcuts import get_object_or_404
@@ -112,15 +112,9 @@ class AttendanceUpdateView(APIView):
 
 
 # Signup 
-class SignupView(APIView):
+class SignupView(generics.CreateAPIView): # or whatever your view class is
+    serializer_class = SignupSerializer
     permission_classes = [AllowAny]
-
-    def post(self, request):
-        serializer = SignupSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "User created"}, status=201)
-        return Response(serializer.errors, status=400)
 
 # Login
 class LoginView(APIView):
